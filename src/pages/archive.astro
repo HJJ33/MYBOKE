@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { formatDate, getArchives, getPublishedEssays } from "../lib/essays";
+
+const archives = getArchives(await getPublishedEssays());
+---
+
+<BaseLayout title="归档" description="按年份整理的随笔。">
+  <section class="page-title">
+    <span class="eyebrow">Archive</span>
+    <h1>归档</h1>
+  </section>
+  {
+    archives.map(([year, essays]) => (
+      <section class="archive-group" aria-labelledby={`year-${year}`}>
+        <h2 id={`year-${year}`}>{year}</h2>
+        <ul class="archive-list">
+          {essays.map((essay) => (
+            <li>
+              <time datetime={essay.data.pubDate.toISOString()}>{formatDate(essay.data.pubDate)}</time>
+              <a href={`/essays/${essay.id}/`}>{essay.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</BaseLayout>

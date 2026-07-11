@@ -1,0 +1,23 @@
+---
+import type { Essay } from "../lib/essays";
+import { formatDate, getReadingTime } from "../lib/essays";
+import TagList from "./TagList.astro";
+
+interface Props {
+  essay: Essay;
+}
+
+const { essay } = Astro.props;
+const readingTime = getReadingTime(essay);
+---
+
+<article class="surface-card essay-card">
+  <div class="meta">
+    <time datetime={essay.data.pubDate.toISOString()}>{formatDate(essay.data.pubDate)}</time>
+    <span aria-hidden="true"> · </span>
+    <span>{readingTime} 分钟阅读</span>
+  </div>
+  <h2><a href={`/essays/${essay.id}/`}>{essay.data.title}</a></h2>
+  <p>{essay.data.description}</p>
+  <TagList tags={essay.data.tags} />
+</article>

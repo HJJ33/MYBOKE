@@ -1,0 +1,24 @@
+---
+import EssayCard from "../components/EssayCard.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getPublishedEssays } from "../lib/essays";
+
+const essays = await getPublishedEssays();
+---
+
+<BaseLayout>
+  <section class="intro" aria-labelledby="site-title">
+    <span class="eyebrow">Guyue Notes</span>
+    <h1 id="site-title">古月随笔</h1>
+    <p>记录自己随笔。</p>
+  </section>
+  <section aria-labelledby="latest-title">
+    <div class="section-heading">
+      <h2 id="latest-title">最近写下的</h2>
+      <span class="meta">{essays.length} 篇随笔</span>
+    </div>
+    <div class="essay-list">
+      {essays.map((essay) => <EssayCard essay={essay} />)}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,27 @@
+---
+import type { GetStaticPaths } from "astro";
+import EssayCard from "../../components/EssayCard.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getEssaysByTag, getPublishedEssays, getTags } from "../../lib/essays";
+
+export const getStaticPaths = (async () => {
+  const essays = await getPublishedEssays();
+  return getTags(essays).map(([tag]) => ({
+    params: { tag },
+    props: { essays: getEssaysByTag(essays, tag) },
+  }));
+}) satisfies GetStaticPaths;
+
+const { tag } = Astro.params;
+const { essays } = Astro.props;
+---
+
+<BaseLayout title={`标签：${tag}`} description={`所有标记为 ${tag} 的随笔。`}>
+  <section class="page-title">
+    <span class="eyebrow">Tag</span>
+    <h1>{tag}</h1>
+  </section>
+  <div class="essay-list">
+    {essays.map((essay) => <EssayCard essay={essay} />)}
+  </div>
+</BaseLayout>

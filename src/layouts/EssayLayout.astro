@@ -1,0 +1,36 @@
+---
+import TagList from "../components/TagList.astro";
+import type { Essay } from "../lib/essays";
+import { formatDate, getReadingTime } from "../lib/essays";
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  essay: Essay;
+  previous?: Essay;
+  next?: Essay;
+}
+
+const { essay, previous, next } = Astro.props;
+const readingTime = getReadingTime(essay);
+---
+
+<BaseLayout title={essay.data.title} description={essay.data.description}>
+  <article>
+    <header class="essay-header">
+      <span class="eyebrow">随笔</span>
+      <h1>{essay.data.title}</h1>
+      <p class="lead">{essay.data.description}</p>
+      <div class="meta">
+        <time datetime={essay.data.pubDate.toISOString()}>{formatDate(essay.data.pubDate)}</time>
+        <span aria-hidden="true"> · </span>
+        <span>{readingTime} 分钟阅读</span>
+      </div>
+      <TagList tags={essay.data.tags} />
+    </header>
+    <div class="prose"><slot /></div>
+  </article>
+  <nav class="essay-footer" aria-label="文章导航">
+    {previous ? <a href={`/essays/${previous.id}/`}>← {previous.data.title}</a> : <span />}
+    {next ? <a href={`/essays/${next.id}/`}>{next.data.title} →</a> : <a href="/">返回首页</a>}
+  </nav>
+</BaseLayout>

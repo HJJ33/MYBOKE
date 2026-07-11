@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getPublishedEssays, getTags } from "../../lib/essays";
+
+const tags = getTags(await getPublishedEssays());
+---
+
+<BaseLayout title="标签" description="随笔标签索引。">
+  <section class="page-title">
+    <span class="eyebrow">Tags</span>
+    <h1>标签</h1>
+    <div class="tag-list">
+      {
+        tags.map(([tag, count]) => (
+          <a class="pill" href={`/tags/${encodeURIComponent(tag)}/`}>
+            {tag} · {count}
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

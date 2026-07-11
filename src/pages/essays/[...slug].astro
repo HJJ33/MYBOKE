@@ -1,0 +1,25 @@
+---
+import { render } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import EssayLayout from "../../layouts/EssayLayout.astro";
+import { getPublishedEssays } from "../../lib/essays";
+
+export const getStaticPaths = (async () => {
+  const essays = await getPublishedEssays();
+  return essays.map((essay, index) => ({
+    params: { slug: essay.id },
+    props: {
+      essay,
+      previous: essays[index + 1],
+      next: essays[index - 1],
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+const { essay, previous, next } = Astro.props;
+const { Content } = await render(essay);
+---
+
+<EssayLayout essay={essay} previous={previous} next={next}>
+  <Content />
+</EssayLayout>
