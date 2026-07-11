@@ -12,12 +12,13 @@ const readingTime = getReadingTime(essay);
 ---
 
 <article class="surface-card essay-card">
+  <a class="essay-card-link" href={`/essays/${essay.id}/`} aria-label={`阅读：${essay.data.title}`}></a>
   <div class="meta">
     <time datetime={essay.data.pubDate.toISOString()}>{formatDate(essay.data.pubDate)}</time>
     <span aria-hidden="true"> · </span>
     <span>{readingTime} 分钟阅读</span>
   </div>
-  <h2><a href={`/essays/${essay.id}/`}>{essay.data.title}</a></h2>
+  <h2>{essay.data.title}</h2>
   <p>{essay.data.description}</p>
   <TagList tags={essay.data.tags} />
 </article>
