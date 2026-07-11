@@ -1,6 +1,12 @@
 @import "tailwindcss";
-@import "@fontsource/huninn/latin-400.css";
-@import "@fontsource/huninn/chinese-traditional-400.css";
+
+@font-face {
+  font-family: "ChillRoundF";
+  font-style: normal;
+  font-weight: 100 900;
+  src: url("@fontpkg/chill-round-f/ChillRoundF.ttf") format("truetype");
+  font-display: swap;
+}
 
 :root {
   --color-bg-page: #f3fafb;
@@ -23,7 +29,7 @@
   --measure: 68ch;
   --layout-max-width: 72rem;
   --transition-base: 0.2s ease;
-  font-family: "Huninn", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  font-family: "ChillRoundF", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
   color: var(--color-text-primary);
   background: var(--color-bg-page);
   font-size: 17px;
