@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "@fontsource/huninn/latin-400.css";
+@import "@fontsource/huninn/chinese-traditional-400.css";
 
 :root {
   --color-bg-page: #f3fafb;
@@ -21,7 +23,7 @@
   --measure: 68ch;
   --layout-max-width: 72rem;
   --transition-base: 0.2s ease;
-  font-family: "jf-openhuninn-2.0", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  font-family: "Huninn", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
   color: var(--color-text-primary);
   background: var(--color-bg-page);
   font-size: 17px;

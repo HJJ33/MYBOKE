@@ -1,6 +1,6 @@
 # 古月随笔
 
-一个使用 Astro、Tailwind CSS 与 Biome 构建的个人随笔博客。
+一个使用 Astro、Tailwind CSS 与 Biome 构建的个人随笔博客。中文界面自托管开源的 Huninn 圆角字体（OFL-1.1）。
 
 ## 本地开发
 
